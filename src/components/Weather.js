@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  grey,
-  greyDark,
-  greyLight,
-  longShadow,
-  secondaryFont,
-} from "../Variables";
+import { grey, greyLight, longShadow, secondaryFont } from "../Variables";
 
 import Forecast from "./Forecast";
 
