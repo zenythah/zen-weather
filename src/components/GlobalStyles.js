@@ -12,8 +12,17 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        /* font-family: 'Nippo', sans-serif; */
         font: 300 1.8rem 'Clash Display', sans-serif;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    input {
+        &:focus {
+            outline: 0;
+        }
     }
 
 `;

@@ -78,6 +78,7 @@ const StyledMain = styled.div`
   align-items: center;
   height: 50%;
   margin: auto auto;
+  transition: all 0.5s ease-out;
 
   div {
     cursor: pointer;
