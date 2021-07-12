@@ -1,16 +1,19 @@
 import React from "react";
-// import { motion } from "framer-motion";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+// import { motion } from "framer-motion";
 
-// import { slider } from "../animations";
 import Search from "../components/Search";
 import Weather from "../components/Weather";
+// import { slider } from "../animations";
 
 const Dashboard = () => {
+  const location = useSelector((state) => state.weather.location);
+
   return (
     <StyledDashboard>
       <Search />
-      <Weather />
+      {location && <Weather />}
     </StyledDashboard>
   );
 };

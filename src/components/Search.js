@@ -2,11 +2,25 @@ import React from "react";
 import styled from "styled-components";
 import { SearchOutline } from "react-ionicons";
 import { shortShadow } from "../Variables";
+import { useDispatch } from "react-redux";
+
+import { fetchWeather, fetchForecast } from "../Api";
 
 const Search = () => {
+  const dispatch = useDispatch();
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    const searchLocation = e.target.firstChild.value;
+    dispatch(fetchWeather(searchLocation));
+    dispatch(fetchForecast(searchLocation));
+
+    e.target.reset();
+  };
+
   return (
     <StyledSearch>
-      <StyledForm>
+      <StyledForm onSubmit={submitForm}>
         <input
           type="text"
           name="search"
@@ -28,7 +42,7 @@ const StyledSearch = styled.div`
   justify-content: center;
 `;
 
-const StyledForm = styled.div`
+const StyledForm = styled.form`
   width: 50%;
   display: flex;
   justify-content: center;

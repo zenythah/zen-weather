@@ -4,7 +4,7 @@ import * as variables from "../Variables";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { darkmode, lightmode } from "../actions/action";
+import { lightmode, darkmode } from "../actions/action";
 
 import {
   AlbumsOutline,

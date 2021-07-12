@@ -4,17 +4,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 
 //importing all the reducers in one
-import { allReducers } from "./reducers";
+import allReducers from "./reducers";
 
 //creating the redux store and passing it using the provider in the app
-const store = createStore(
-  allReducers,
+const store = compose(
+  applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+)(createStore)(allReducers);
 
 ReactDOM.render(
   <React.StrictMode>

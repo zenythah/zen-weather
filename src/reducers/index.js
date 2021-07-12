@@ -1,7 +1,13 @@
 import { combineReducers } from "redux";
 
+import forecastReducer from "./forecastReducer";
 import themeReducer from "./themeReducer";
+import weatherReducer from "./weatherReducer";
 
-export const allReducers = combineReducers({
+const allReducers = combineReducers({
   theme: themeReducer,
+  weather: weatherReducer,
+  forecast: forecastReducer,
 });
+
+export default allReducers;

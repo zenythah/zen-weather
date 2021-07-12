@@ -1,42 +1,60 @@
 import React from "react";
 import styled from "styled-components";
-import { grey, greyLight, longShadow, secondaryFont } from "../Variables";
+import { useSelector } from "react-redux";
 
+import { grey, greyLight, longShadow, secondaryFont } from "../Variables";
 import Forecast from "./Forecast";
 
 const Weather = () => {
+  const location = useSelector((state) => state.weather.location);
+  const current = useSelector((state) => state.weather.current);
+
+  const dateAndTime = (date) => {
+    const fullDate = date.split(" ");
+    const time = fullDate[1];
+
+    const newDate = new Date(fullDate[0]).toDateString();
+
+    return [time, newDate];
+  };
+
+  const [time, newDate] = dateAndTime(location.localtime);
+
   return (
     <StyledWeather>
       <StyledLocation>
         <StyledName>
-          <h3>Tokyo</h3> | <h4>Japan</h4>
+          <h3>{location.name}</h3>
+          <h4>{location.country}</h4>
         </StyledName>
         <StyledDate>
-          <h3>Sunday, 16th July, 2021</h3>
-          <h3>Day, 11:20 AM</h3>
+          <h3>{newDate}</h3>
+          <h3>
+            {current.is_day > 0 ? "Day" : "Night"}, {time}
+          </h3>
         </StyledDate>
       </StyledLocation>
       <StyledConditions>
         <StyledTemperature>
-          <span>15</span>
+          <span>{Math.round(current.temp_c)}</span>
         </StyledTemperature>
         <StyledCondition>
           <StyledStatus className="status">
-            <h5>icon</h5>
-            <h5>condition name</h5>
+            <img src={current.condition.icon} alt="icon" />
+            <h5>{current.condition.text}</h5>
           </StyledStatus>
           <StyledOthers>
             <div className="status">
-              <h4>UV Index:</h4> <span>32.4</span>
+              <h4>UV Index</h4> <span>{current.uv}</span>
             </div>
             <div className="status">
-              <h4>Pressure:</h4> <span>55 P</span>
+              <h4>Pressure</h4> <span>{current.pressure_mb} mb</span>
             </div>
             <div className="status">
-              <h4>Humidity:</h4> <span>11</span>
+              <h4>Humidity</h4> <span>{current.humidity}</span>
             </div>
             <div className="status">
-              <h4>Wind Speed:</h4> <span>2.4mph</span>
+              <h4>Wind Speed</h4> <span>{current.wind_mph} mph</span>
             </div>
           </StyledOthers>
         </StyledCondition>
@@ -99,7 +117,7 @@ const StyledDate = styled.div`
 const StyledConditions = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
 `;
 
