@@ -1,4 +1,11 @@
-const initState = {};
+const initState = {
+  location: [],
+  current: [],
+  forecast: {
+    forecast: { forecastday: [] },
+  },
+  alerts: [],
+};
 
 const forecastReducer = (state = initState, action) => {
   switch (action.type) {

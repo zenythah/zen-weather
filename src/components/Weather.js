@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-import { grey, greyLight, longShadow, secondaryFont } from "../Variables";
+import {
+  grey,
+  greyDark,
+  greyLight,
+  longShadow,
+  secondaryFont,
+} from "../Variables";
 import Forecast from "./Forecast";
 
 const Weather = () => {
@@ -13,7 +19,12 @@ const Weather = () => {
     const fullDate = date.split(" ");
     const time = fullDate[1];
 
-    const newDate = new Date(fullDate[0]).toDateString();
+    const newDate = new Date(fullDate[0]).toLocaleDateString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
     return [time, newDate];
   };
@@ -140,7 +151,8 @@ const StyledTemperature = styled.div`
       width: 3rem;
       height: 3rem;
       border-radius: 50%;
-      background: ${greyLight};
+      background: ${greyDark};
+      transform: translate(50%, 20%);
     }
   }
 `;
@@ -158,9 +170,8 @@ const StyledCondition = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    span,
-    h5 {
-      color: ${grey};
+    span {
+      color: ${greyDark};
     }
   }
 `;
@@ -169,7 +180,10 @@ const StyledStatus = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: 1rem; */
+
+  h5 {
+    font: 500 2.5rem ${secondaryFont};
+  }
 `;
 
 const StyledOthers = styled.div`

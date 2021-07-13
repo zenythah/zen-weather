@@ -1,11 +1,29 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import { v4 as uuid } from "uuid";
+
+import ForecastDay from "./ForecastDay";
 
 const Forecast = () => {
+  const forecastDay = useSelector(
+    (state) => state.forecast.forecast.forecastday
+  );
+
   return (
-    <div>
-      <h1>5days Forecast</h1>
-    </div>
+    <StyledForecast>
+      {forecastDay
+        ? forecastDay.map((forecast) => (
+            <ForecastDay forecast={forecast} key={uuid()} id={uuid()} />
+          ))
+        : null}
+    </StyledForecast>
   );
 };
+
+const StyledForecast = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+`;
 
 export default Forecast;
