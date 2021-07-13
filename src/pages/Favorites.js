@@ -9,9 +9,15 @@ const Favorites = () => {
 
   return (
     <StyledFavorites>
-      {favorites.map((fav) => (
-        <h1>{fav}</h1>
-      ))}
+      {favorites.length > 0 ? (
+        favorites.map((fav) => <h1>{fav}</h1>)
+      ) : (
+        <div>
+          {" "}
+          <h1>You have no favorites, try adding some </h1> <br />
+          <span>Written by "Kwaame"😉</span>
+        </div>
+      )}
     </StyledFavorites>
   );
 };
