@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import FavReducer from "./FavReducer";
 
 import forecastReducer from "./forecastReducer";
 import themeReducer from "./themeReducer";
@@ -8,6 +9,7 @@ const allReducers = combineReducers({
   theme: themeReducer,
   weather: weatherReducer,
   forecast: forecastReducer,
+  favorites: FavReducer,
 });
 
 export default allReducers;

@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
+import { StarOutline } from "react-ionicons";
 import {
   grey,
   greyDark,
@@ -10,10 +11,13 @@ import {
   secondaryFont,
 } from "../Variables";
 import Forecast from "./Forecast";
+import { addfavorite, remfavorite } from "../Api";
 
 const Weather = () => {
   const location = useSelector((state) => state.weather.location);
   const current = useSelector((state) => state.weather.current);
+  const favorites = useSelector((state) => state.favorites);
+  const dispatch = useDispatch();
 
   const dateAndTime = (date) => {
     const fullDate = date.split(" ");
@@ -27,6 +31,18 @@ const Weather = () => {
     });
 
     return [time, newDate];
+  };
+
+  const checkFav = (location) => {
+    //checking if there are favs and if the location exists in the favs
+    if (favorites.favs.length >= 0 && favorites.favs.includes(location)) {
+      dispatch(remfavorite(location));
+    } else if (favorites.favs.length <= 0) {
+      //checking if favs is empty
+      dispatch(addfavorite(location));
+    } else if (favorites.favs.filter((fav) => fav !== location).length >= 0) {
+      dispatch(addfavorite(location));
+    }
   };
 
   const [time, newDate] = dateAndTime(location.localtime);
@@ -44,6 +60,12 @@ const Weather = () => {
             {current.is_day > 0 ? "Day" : "Night"}, {time}
           </h3>
         </StyledDate>
+        <StyledFavIcon
+          onClick={() => checkFav(location.name)}
+          className={favorites.favs.includes(location.name) ? "active" : null}
+        >
+          <StarOutline width="3rem" height="3rem"></StarOutline>
+        </StyledFavIcon>
       </StyledLocation>
       <StyledConditions>
         <StyledTemperature>
@@ -97,7 +119,8 @@ const StyledName = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem;
+  text-align: center;
 
   h3 {
     font: 500 3.5rem ${secondaryFont};
@@ -110,18 +133,35 @@ const StyledName = styled.div`
 `;
 
 const StyledDate = styled.div`
+  flex: 0 0 55%;
   width: 35%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-evenly;
-  margin: 0 auto;
+  padding-left: 8rem;
 
   h3 {
     font-size: 1.8rem;
     color: ${grey};
     letter-spacing: 1.6px;
+  }
+`;
+
+const StyledFavIcon = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    cursor: pointer;
+    color: ${greyLight};
+  }
+
+  &.active svg {
+    color: orange;
   }
 `;
 

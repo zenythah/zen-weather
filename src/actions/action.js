@@ -6,6 +6,8 @@ const FETCH_WEATHER_ERROR = "FETCH_WEATHER_ERROR";
 const FETCH_FORECAST_PENDING = "FETCH_FORECAST_PENDING";
 const FETCH_FORECAST_SUCCESS = "FETCH_FORECAST_SUCCESS";
 const FETCH_FORECAST_ERROR = "FETCH_FORECAST_ERROR";
+const ADD_FAVORITE = "ADD_FAVORITE";
+const REM_FAVORITE = "REM_FAVORITE";
 
 export const darkmode = () => {
   return {
@@ -56,5 +58,19 @@ export const fetchForecastError = (err) => {
   return {
     type: FETCH_FORECAST_ERROR,
     payload: err,
+  };
+};
+
+export const addFavorite = (location) => {
+  return {
+    type: ADD_FAVORITE,
+    payload: location,
+  };
+};
+
+export const remFavorite = (location) => {
+  return {
+    type: REM_FAVORITE,
+    payload: location,
   };
 };

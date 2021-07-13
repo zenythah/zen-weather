@@ -7,6 +7,8 @@ import {
   fetchForecastError,
   fetchForecastPending,
   fetchForecastSuccess,
+  addFavorite,
+  remFavorite,
 } from "./actions/action";
 
 export const fetchWeather = (location) => {
@@ -44,5 +46,17 @@ export const fetchForecast = (location) => {
       })
       //calling the action that is responsible for the error handling
       .catch((err) => dispatch(fetchForecastError(err)));
+  };
+};
+
+export const addfavorite = (location) => {
+  return (dispatch) => {
+    dispatch(addFavorite(location));
+  };
+};
+
+export const remfavorite = (location) => {
+  return (dispatch) => {
+    dispatch(remFavorite(location));
   };
 };
