@@ -19,7 +19,7 @@ export const fetchWeather = (location) => {
     //API fetch request started
     axios
       .get(
-        `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${location}`
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${location}`
       )
       .then((data) => {
         //calling the action that is responsible for the data
@@ -38,7 +38,7 @@ export const fetchForecast = (location) => {
     //API fetch request started
     axios
       .get(
-        `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=5&alerts=yes`
+        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=5&alerts=yes`
       )
       .then((data) => {
         //calling the action that is responsible for the data
