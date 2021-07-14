@@ -11,11 +11,13 @@ import thunk from "redux-thunk";
 //importing all the reducers in one
 import allReducers from "./reducers";
 
+const composeEnchancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 //creating the redux store and passing it using the provider in the app
-const store = compose(
-  applyMiddleware(thunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)(createStore)(allReducers);
+const store = createStore(
+  allReducers,
+  composeEnchancer(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>
