@@ -5,15 +5,23 @@ import { useSelector } from "react-redux";
 
 import Search from "../components/Search";
 import Weather from "../components/Weather";
-// import { slider } from "../animations";
+import { Loader } from "../Variables";
 
 const Dashboard = () => {
-  const location = useSelector((state) => state.weather.location);
+  const weather = useSelector((state) => state.weather);
 
   return (
     <StyledDashboard>
       <Search />
-      {location && <Weather />}
+
+      {weather.pending ? (
+        <Loader>
+          <span></span>
+          <span></span>
+          <span></span>
+        </Loader>
+      ) : null}
+      {weather.location && <Weather />}
     </StyledDashboard>
   );
 };

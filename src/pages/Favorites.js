@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+// import { v4 as uuid } from "uuid";
 
 import { greyLight, primaryColor } from "../Variables";
+// import ForecastDay from "../components/ForecastDay";
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.favorites.favs);
@@ -10,7 +12,11 @@ const Favorites = () => {
   return (
     <StyledFavorites>
       {favorites.length > 0 ? (
-        favorites.map((fav) => <h1>{fav}</h1>)
+        favorites.map((fav) => (
+          //making forecast calls for all the favorites
+          <h1>{fav}</h1>
+          // <ForecastDay forcast={fav} key={uuid()} id={uuid()} />
+        ))
       ) : (
         <div>
           {" "}
