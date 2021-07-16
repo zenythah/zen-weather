@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { CloseOutline } from "react-ionicons";
-import { colorWhite } from "../Variables";
 import { motion } from "framer-motion";
 import { slider } from "../animations";
 
