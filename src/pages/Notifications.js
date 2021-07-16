@@ -1,18 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import { slider } from "../animations";
 
 const Notifications = () => {
   const toggle = useSelector((state) => state.toggle);
 
   return (
     <StyledNotification className={toggle ? "active" : null}>
-      <h1>Notifications</h1>
+      <motion.h1 variants={slider} initial="hidden" animate="show">
+        Notifications
+      </motion.h1>
     </StyledNotification>
   );
 };
 
-const StyledNotification = styled.div`
+const StyledNotification = styled(motion.div)`
   flex: 1;
   height: 100vh;
   max-height: 100vh;

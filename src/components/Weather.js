@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 import { StarOutline } from "react-ionicons";
+import { slider } from "../animations";
 import {
   colorWhite,
   grey,
@@ -63,7 +65,12 @@ const Weather = () => {
   const [time, newDate] = dateAndTime(location.localtime);
 
   return (
-    <StyledWeather className={theme ? "dark-theme" : null}>
+    <StyledWeather
+      variants={slider}
+      initial="hidden"
+      animate="show"
+      className={theme ? "dark-theme" : null}
+    >
       <StyledLocation>
         <StyledName>
           <h3>{location.name}</h3>
@@ -112,7 +119,7 @@ const Weather = () => {
   );
 };
 
-const StyledWeather = styled.div`
+const StyledWeather = styled(motion.div)`
   width: 50%;
   max-height: 75vh;
   margin: auto auto;

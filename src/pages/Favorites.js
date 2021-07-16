@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 // import { v4 as uuid } from "uuid";
 
 import { greyLight, primaryColor } from "../Variables";
+import { slider } from "../animations";
 // import ForecastDay from "../components/ForecastDay";
 
 const Favorites = () => {
@@ -15,21 +17,23 @@ const Favorites = () => {
       {favorites.length > 0 ? (
         favorites.map((fav) => (
           //making forecast calls for all the favorites
-          <h1>{fav}</h1>
+          <motion.h1 variants={slider} initial="hidden" animate="show">
+            {fav}
+          </motion.h1>
           // <ForecastDay forcast={fav} key={uuid()} id={uuid()} />
         ))
       ) : (
-        <div>
+        <motion.div variants={slider} initial="hidden" animate="show">
           {" "}
           <h1>You have no favorites, try adding some </h1> <br />
           <span>Written by "Kwaame"😉</span>
-        </div>
+        </motion.div>
       )}
     </StyledFavorites>
   );
 };
 
-const StyledFavorites = styled.div`
+const StyledFavorites = styled(motion.div)`
   flex: 1;
   width: 100%;
   max-height: 100vh;

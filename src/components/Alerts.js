@@ -7,7 +7,7 @@ import { dangerColor, dangerColorBg } from "../Variables";
 const Alerts = ({ message, time, setVisible, visible }) => {
   useEffect(() => {
     setTimeout(() => {
-      // setVisible((v) => !v);
+      setVisible((v) => !v);
     }, time);
   }, [time, setVisible]);
 

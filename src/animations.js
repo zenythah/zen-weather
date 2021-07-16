@@ -5,7 +5,7 @@ export const slider = {
   show: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.75 },
+    transition: { duration: 1 },
   },
 };
 

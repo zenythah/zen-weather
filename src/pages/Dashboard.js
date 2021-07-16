@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import Search from "../components/Search";
 import Weather from "../components/Weather";
@@ -39,7 +39,7 @@ const Dashboard = () => {
   );
 };
 
-const StyledDashboard = styled.div`
+const StyledDashboard = styled(motion.div)`
   flex: 1;
   min-height: 100vh;
   display: grid;
