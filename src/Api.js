@@ -7,6 +7,9 @@ import {
   fetchForecastError,
   fetchForecastPending,
   fetchForecastSuccess,
+  fetchFavforecastError,
+  fetchFavforecastPending,
+  fetchFavforecastSuccess,
   addFavorite,
   remFavorite,
 } from "./actions/action";
@@ -46,6 +49,25 @@ export const fetchForecast = (location) => {
       })
       //calling the action that is responsible for the error handling
       .catch((err) => dispatch(fetchForecastError(err)));
+  };
+};
+
+export const fetchFavforecast = (location) => {
+  return (dispatch) => {
+    //running an action through the dispatch to set pending
+    dispatch(fetchFavforecastPending());
+
+    //API fetch request started
+    axios
+      .get(
+        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${location}&days=5&alerts=yes`
+      )
+      .then((data) => {
+        //calling the action that is responsible for the data
+        dispatch(fetchFavforecastSuccess(data.data.forecast));
+      })
+      //calling the action that is responsible for the error handling
+      .catch((err) => dispatch(fetchFavforecastError(err)));
   };
 };
 

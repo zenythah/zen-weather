@@ -20,8 +20,9 @@ const Dashboard = () => {
           <span></span>
           <span></span>
         </Loader>
-      ) : null}
-      {weather.location && <Weather />}
+      ) : (
+        weather.location && <Weather />
+      )}
     </StyledDashboard>
   );
 };

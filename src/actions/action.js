@@ -6,6 +6,9 @@ const FETCH_WEATHER_ERROR = "FETCH_WEATHER_ERROR";
 const FETCH_FORECAST_PENDING = "FETCH_FORECAST_PENDING";
 const FETCH_FORECAST_SUCCESS = "FETCH_FORECAST_SUCCESS";
 const FETCH_FORECAST_ERROR = "FETCH_FORECAST_ERROR";
+const FETCH_FAVFORECAST_PENDING = "FETCH_FAVFORECAST_PENDING";
+const FETCH_FAVFORECAST_SUCCESS = "FETCH_FAVFORECAST_SUCCESS";
+const FETCH_FAVFORECAST_ERROR = "FETCH_FAVFORECAST_ERROR";
 const ADD_FAVORITE = "ADD_FAVORITE";
 const REM_FAVORITE = "REM_FAVORITE";
 
@@ -72,5 +75,25 @@ export const remFavorite = (location) => {
   return {
     type: REM_FAVORITE,
     payload: location,
+  };
+};
+
+export const fetchFavforecastPending = (forecast) => {
+  return {
+    type: FETCH_FAVFORECAST_PENDING,
+  };
+};
+
+export const fetchFavforecastSuccess = (forecast) => {
+  return {
+    type: FETCH_FAVFORECAST_SUCCESS,
+    payload: forecast,
+  };
+};
+
+export const fetchFavforecastError = (err) => {
+  return {
+    type: FETCH_FAVFORECAST_ERROR,
+    payload: err,
   };
 };

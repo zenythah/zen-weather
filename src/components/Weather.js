@@ -11,7 +11,7 @@ import {
   secondaryFont,
 } from "../Variables";
 import Forecast from "./Forecast";
-import { addfavorite, remfavorite } from "../Api";
+import { addfavorite, remfavorite, fetchFavforecast } from "../Api";
 
 const Weather = () => {
   const location = useSelector((state) => state.weather.location);
@@ -34,14 +34,26 @@ const Weather = () => {
   };
 
   const checkFav = (location) => {
-    //checking if there are favs and if the location exists in the favs
+    // checking if there are favs and if the location exists in the favs
     if (favorites.favs.length >= 0 && favorites.favs.includes(location)) {
       dispatch(remfavorite(location));
+
+      favorites.favs.forEach((loc) => {
+        dispatch(fetchFavforecast(loc));
+      });
     } else if (favorites.favs.length <= 0) {
-      //checking if favs is empty
+      // checking if favs is empty
       dispatch(addfavorite(location));
+
+      favorites.favs.forEach((loc) => {
+        dispatch(fetchFavforecast(loc));
+      });
     } else if (favorites.favs.filter((fav) => fav !== location).length >= 0) {
       dispatch(addfavorite(location));
+
+      favorites.favs.forEach((loc) => {
+        dispatch(fetchFavforecast(loc));
+      });
     }
   };
 
