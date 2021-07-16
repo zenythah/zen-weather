@@ -27,10 +27,10 @@ const Alert = ({ message, color, bgcolor }) => {
 
 const StyledAlert = styled(motion.div)`
   position: absolute;
-  top: 10%;
-  right: 5%;
-  width: 30rem;
-  height: auto;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
   background: ${(props) => props.background};
   color: ${(props) => props.color};
   display: flex;
@@ -45,11 +45,12 @@ const StyledAlert = styled(motion.div)`
   svg {
     cursor: pointer;
     position: absolute;
-    top: 2%;
-    right: 2%;
-    width: 1.5rem;
-    height: 1.5rem;
-    color: ${colorWhite};
+    top: 35%;
+    right: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    transform: translate(-20%, -50%);
+    color: ${(props) => props.color};
   }
 `;
 

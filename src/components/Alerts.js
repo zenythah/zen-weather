@@ -7,7 +7,7 @@ import { dangerColor, dangerColorBg } from "../Variables";
 const Alerts = ({ message, time, setVisible, visible }) => {
   useEffect(() => {
     setTimeout(() => {
-      setVisible((v) => !v);
+      // setVisible((v) => !v);
     }, time);
   }, [time, setVisible]);
 
@@ -36,12 +36,12 @@ const StyledAlerts = styled.div`
   position: absolute;
   top: 10%;
   right: 5%;
-  height: auto;
-  width: auto;
+  height: 6rem;
+  width: 30rem;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 `;
 
 export default Alerts;
