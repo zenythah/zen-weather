@@ -6,6 +6,10 @@ export const greyDark = "#121212";
 export const grey = "#555";
 export const greyLight = "#a1a1a1";
 export const colorWhite = "#fff";
+export const dangerColor = "#721c24";
+export const dangerColorBg = "#f8d7da";
+export const successColor = "#155724";
+export const successColorBG = "#d4edda";
 
 export const Hide = styled.div`
   overflow: hidden;

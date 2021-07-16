@@ -119,9 +119,9 @@ const StyledWeather = styled.div`
   box-shadow: ${longShadow};
   display: grid;
   grid-template-rows: 15% 1fr 30%;
-  overflow-y: scroll;
 
   @media only screen and (max-width: 1340px) {
+    overflow-y: scroll;
     width: 70%;
   }
 
