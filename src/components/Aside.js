@@ -4,7 +4,7 @@ import * as variables from "../Variables";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { lightmode, darkmode } from "../actions/action";
+import { setTheme } from "../actions/action";
 
 import {
   AlbumsOutline,
@@ -22,9 +22,10 @@ const Aside = () => {
 
   //using the selector to identify the state
   const theme = useSelector((state) => state.theme);
+  const toggle = useSelector((state) => state.toggle);
 
   return (
-    <StyledNav>
+    <StyledNav className={toggle ? "active" : null}>
       <StyledMain>
         <Link to="/" className={pathname === "/" ? "active" : null}>
           <AlbumsOutline color="#fff" width="3rem" height="3rem" />
@@ -43,14 +44,14 @@ const Aside = () => {
         <div>
           {theme ? (
             <SunnyOutline
-              onClick={() => dispatch(lightmode())}
+              onClick={() => dispatch(setTheme())}
               color="#fff"
               width="3rem"
               height="3rem"
             />
           ) : (
             <MoonOutline
-              onClick={() => dispatch(darkmode())}
+              onClick={() => dispatch(setTheme())}
               color="#fff"
               width="3rem"
               height="3rem"
@@ -69,6 +70,31 @@ const StyledNav = styled.div`
   display: grid;
   grid-template-rows: 80% 20%;
   grid-template-columns: 1fr;
+
+  @media only screen and (max-width: 800px) {
+    width: 10%;
+  }
+
+  @media only screen and (max-width: 650px) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    z-index: 100;
+    transition: all 0.5s ease-out;
+
+    &.active {
+      transform: translate(0);
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    width: 15%;
+  }
+
+  @media only screen and (max-width: 400px) {
+    width: 20%;
+  }
 `;
 
 const StyledMain = styled.div`

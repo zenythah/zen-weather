@@ -1,8 +1,6 @@
 const themeReducer = (state = false, action) => {
   switch (action.type) {
-    case "DARK_MODE":
-      return !state;
-    case "LIGHT_MODE":
+    case "SET_THEME":
       return !state;
     default:
       return state;

@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { StarOutline } from "react-ionicons";
 import {
+  colorWhite,
   grey,
   greyDark,
   greyLight,
   longShadow,
+  longShadowLight,
   secondaryFont,
 } from "../Variables";
 import Forecast from "./Forecast";
@@ -17,6 +19,7 @@ const Weather = () => {
   const location = useSelector((state) => state.weather.location);
   const current = useSelector((state) => state.weather.current);
   const favorites = useSelector((state) => state.favorites);
+  const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
   const dateAndTime = (date) => {
@@ -60,13 +63,13 @@ const Weather = () => {
   const [time, newDate] = dateAndTime(location.localtime);
 
   return (
-    <StyledWeather>
+    <StyledWeather className={theme ? "dark-theme" : null}>
       <StyledLocation>
         <StyledName>
           <h3>{location.name}</h3>
           <h4>{location.country}</h4>
         </StyledName>
-        <StyledDate>
+        <StyledDate className={theme ? "dark-theme" : null}>
           <h3>{newDate}</h3>
           <h3>
             {current.is_day > 0 ? "Day" : "Night"}, {time}
@@ -80,7 +83,7 @@ const Weather = () => {
         </StyledFavIcon>
       </StyledLocation>
       <StyledConditions>
-        <StyledTemperature>
+        <StyledTemperature className={theme ? "dark-theme" : null}>
           <span>{Math.round(current.temp_c)}</span>
         </StyledTemperature>
         <StyledCondition>
@@ -88,7 +91,7 @@ const Weather = () => {
             <img src={current.condition.icon} alt="icon" />
             <h5>{current.condition.text}</h5>
           </StyledStatus>
-          <StyledOthers>
+          <StyledOthers className={theme ? "dark-theme" : null}>
             <div className="status">
               <h4>UV Index</h4> <span>{current.uv}</span>
             </div>
@@ -111,12 +114,32 @@ const Weather = () => {
 
 const StyledWeather = styled.div`
   width: 50%;
-  height: 75vh;
+  max-height: 75vh;
   margin: auto auto;
   box-shadow: ${longShadow};
   display: grid;
-  grid-template-columns: repeat(1fr, 5);
   grid-template-rows: 15% 1fr 30%;
+  overflow-y: scroll;
+
+  @media only screen and (max-width: 1340px) {
+    width: 70%;
+  }
+
+  @media only screen and (max-width: 1050px) {
+    width: 90%;
+  }
+
+  @media only screen and (max-width: 800px) {
+    height: 100%;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 95%;
+  }
+
+  &.dark-theme {
+    box-shadow: ${longShadowLight};
+  }
 `;
 
 const StyledLocation = styled.div`
@@ -124,6 +147,27 @@ const StyledLocation = styled.div`
   display: flex;
   width: 90%;
   margin: 0 auto;
+
+  @media only screen and (max-width: 800px) {
+    width: 98%;
+  }
+
+  @media only screen and (max-width: 400px) {
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: 40% 50% 10%;
+  }
+
+  @media only screen and (max-width: 400px) {
+    grid-template-columns: 40% 40% 20%;
+  }
+
+  @media only screen and (max-width: 400px) {
+    width: 95%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
 `;
 
 const StyledName = styled.div`
@@ -133,6 +177,10 @@ const StyledName = styled.div`
   align-items: center;
   padding: 1rem;
   text-align: center;
+
+  @media only screen and (max-width: 400px) {
+    grid-area: 1 / 1 / 2 / -1;
+  }
 
   h3 {
     font: 500 3.5rem ${secondaryFont};
@@ -154,10 +202,28 @@ const StyledDate = styled.div`
   justify-content: space-evenly;
   padding-left: 8rem;
 
+  @media only screen and (max-width: 400px) {
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 380px) {
+    width: 125%;
+  }
+
+  @media only screen and (max-width: 300px) {
+    width: 150%;
+  }
+
   h3 {
     font-size: 1.8rem;
     color: ${grey};
     letter-spacing: 1.6px;
+  }
+
+  &.dark-theme {
+    h3 {
+      color: ${greyLight};
+    }
   }
 `;
 
@@ -166,6 +232,10 @@ const StyledFavIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media only screen and (max-width: 300px) {
+    margin-left: 5rem;
+  }
 
   svg {
     cursor: pointer;
@@ -182,6 +252,15 @@ const StyledConditions = styled.div`
   grid-template-columns: repeat(2, 1fr);
   width: 95%;
   margin: 0 auto;
+
+  @media only screen and (max-width: 600px) {
+    grid-template-rows: 70% 30%;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media only screen and (max-width: 600px) {
+    height: 80vh;
+  }
 `;
 
 const StyledTemperature = styled.div`
@@ -190,10 +269,12 @@ const StyledTemperature = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s ease-out;
 
   span {
     font: 500 20rem ${secondaryFont};
     position: relative;
+    transition: all 0.5s ease-out;
 
     &::after {
       content: "";
@@ -205,6 +286,15 @@ const StyledTemperature = styled.div`
       border-radius: 50%;
       background: ${greyDark};
       transform: translate(50%, 20%);
+      transition: all 0.5s ease-out;
+    }
+  }
+
+  &.dark-theme {
+    span {
+      &::after {
+        background: ${colorWhite};
+      }
     }
   }
 `;
@@ -216,6 +306,10 @@ const StyledCondition = styled.div`
   color: ${greyLight};
   display: grid;
   grid-template-rows: 20% 1fr;
+
+  @media only screen and (max-width: 600px) {
+    grid-template-rows: 50% 50%;
+  }
 
   .status {
     display: flex;
@@ -233,6 +327,10 @@ const StyledStatus = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  @media only screen and (max-width: 600px) {
+    justify-content: space-evenly;
+  }
+
   h5 {
     font: 500 2.5rem ${secondaryFont};
   }
@@ -243,6 +341,30 @@ const StyledOthers = styled.div`
   height: 100%;
   display: grid;
   grid-template-rows: repeat(4, 1fr);
+
+  @media only screen and (max-width: 600px) {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    height: 50%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    height: 100%;
+  }
+
+  .status {
+    @media only screen and (max-width: 600px) {
+      justify-content: space-evenly;
+    }
+  }
+
+  &.dark-theme {
+    .status {
+      span {
+        color: ${greyLight};
+      }
+    }
+  }
 `;
 
 export default Weather;

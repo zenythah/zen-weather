@@ -9,13 +9,15 @@ import { Loader } from "../Variables";
 
 const Dashboard = () => {
   const weather = useSelector((state) => state.weather);
+  const theme = useSelector((state) => state.theme);
+  const toggle = useSelector((state) => state.toggle);
 
   return (
-    <StyledDashboard>
+    <StyledDashboard className={toggle ? "active" : null}>
       <Search />
 
       {weather.pending ? (
-        <Loader>
+        <Loader className={theme ? "dark-theme" : null}>
           <span></span>
           <span></span>
           <span></span>
@@ -32,6 +34,12 @@ const StyledDashboard = styled.div`
   min-height: 100vh;
   display: grid;
   grid-template-rows: 12vh 1fr;
+  transition: all 0.5s ease-out;
+
+  &.active {
+    transform: translateX(5rem);
+    overflow: hidden;
+  }
 `;
 
 export default Dashboard;

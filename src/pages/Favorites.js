@@ -8,9 +8,10 @@ import { greyLight, primaryColor } from "../Variables";
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.favorites.favs);
+  const toggle = useSelector((state) => state.toggle);
 
   return (
-    <StyledFavorites>
+    <StyledFavorites className={toggle ? "active" : null}>
       {favorites.length > 0 ? (
         favorites.map((fav) => (
           //making forecast calls for all the favorites
@@ -29,8 +30,10 @@ const Favorites = () => {
 };
 
 const StyledFavorites = styled.div`
+  flex: 1;
   width: 100%;
   max-height: 100vh;
+  height: 100vh;
   margin: 0 auto;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -39,6 +42,7 @@ const StyledFavorites = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 5rem 10rem;
+  transition: all 0.5s ease-out;
 
   &::-webkit-scrollbar {
     width: 0.5rem;
@@ -47,6 +51,11 @@ const StyledFavorites = styled.div`
 
   &::-webkit-scrollbar-thumb {
     background-color: ${primaryColor};
+  }
+
+  &.active {
+    transform: translateX(5rem);
+    overflow: hidden;
   }
 `;
 

@@ -1,5 +1,4 @@
-const DARK_MODE = "DARK_MODE";
-const LIGHT_MODE = "LIGHT_MODE";
+const SET_THEME = "SET_THEME";
 const FETCH_WEATHER_PENDING = "FETCH_WEATHER_PENDING";
 const FETCH_WEATHER_SUCCESS = "FETCH_WEATHER_SUCCESS";
 const FETCH_WEATHER_ERROR = "FETCH_WEATHER_ERROR";
@@ -11,16 +10,11 @@ const FETCH_FAVFORECAST_SUCCESS = "FETCH_FAVFORECAST_SUCCESS";
 const FETCH_FAVFORECAST_ERROR = "FETCH_FAVFORECAST_ERROR";
 const ADD_FAVORITE = "ADD_FAVORITE";
 const REM_FAVORITE = "REM_FAVORITE";
+const SET_TOGGLE = "SET_TOGGLE";
 
-export const darkmode = () => {
+export const setTheme = () => {
   return {
-    type: DARK_MODE,
-  };
-};
-
-export const lightmode = () => {
-  return {
-    type: LIGHT_MODE,
+    type: SET_THEME,
   };
 };
 
@@ -95,5 +89,11 @@ export const fetchFavforecastError = (err) => {
   return {
     type: FETCH_FAVFORECAST_ERROR,
     payload: err,
+  };
+};
+
+export const toggleAside = () => {
+  return {
+    type: SET_TOGGLE,
   };
 };

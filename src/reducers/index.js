@@ -5,6 +5,7 @@ import favReducer from "./favReducer";
 import forecastReducer from "./forecastReducer";
 import themeReducer from "./themeReducer";
 import weatherReducer from "./weatherReducer";
+import toggleReducer from "./toggleReducer";
 
 const allReducers = combineReducers({
   theme: themeReducer,
@@ -12,6 +13,7 @@ const allReducers = combineReducers({
   forecast: forecastReducer,
   favorites: favReducer,
   favforecast: favforecastReducer,
+  toggle: toggleReducer,
 });
 
 export default allReducers;
