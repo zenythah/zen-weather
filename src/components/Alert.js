@@ -12,8 +12,9 @@ const Alert = ({ message, color, bgcolor }) => {
     !close && (
       <StyledAlert
         variants={slider}
-        initial="hidden"
+        initial={{ y: "6rem" }}
         animate="show"
+        transition={{ duration: 0.25 }}
         color={color}
         background={bgcolor}
       >

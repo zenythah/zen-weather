@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
@@ -12,18 +12,20 @@ const Dashboard = () => {
   const weather = useSelector((state) => state.weather);
   const theme = useSelector((state) => state.theme);
   const toggle = useSelector((state) => state.toggle);
-  const [visible, setVisible] = useState(false);
+  const alertType = useSelector((state) => state.alertType);
 
   return (
     <StyledDashboard className={toggle ? "active" : null}>
       <Search />
-      {weather.error ? (
-        <Alerts
-          setVisible={setVisible}
-          visible={visible}
-          time="5000"
-          message={weather.error.message}
-        />
+
+      {alertType ? (
+        alertType === "error" ? (
+          <Alerts message={weather.error.message} type="error" />
+        ) : alertType === "add" ? (
+          <Alerts message="Favorite added successfully" type="success" />
+        ) : (
+          <Alerts message="Favorite removed successfully" type="success" />
+        )
       ) : null}
 
       {weather.pending ? (

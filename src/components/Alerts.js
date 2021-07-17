@@ -1,34 +1,44 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import Alert from "./Alert";
-import { dangerColor, dangerColorBg } from "../Variables";
+import {
+  dangerColor,
+  dangerColorBg,
+  successColor,
+  successColorBG,
+} from "../Variables";
 
-const Alerts = ({ message, time, setVisible, visible }) => {
-  useEffect(() => {
-    setTimeout(() => {
-      setVisible((v) => !v);
-    }, time);
-  }, [time, setVisible]);
+const Alerts = ({ message, type }) => {
+  const visible = useSelector((state) => state.visible);
 
   return (
-    <StyledAlerts>
-      {message.toLowerCase() === "request failed with status code 400"
-        ? !visible && (
+    visible && (
+      <StyledAlerts>
+        {type === "error" ? (
+          message.toLowerCase() === "request failed with status code 400" ? (
             <Alert
               color={dangerColor}
               bgcolor={dangerColorBg}
               message="Incorrect Location, try another location"
             />
-          )
-        : !visible && (
+          ) : (
             <Alert
               color={dangerColor}
               bgcolor={dangerColorBg}
               message="Please connect to the internet"
             />
-          )}
-    </StyledAlerts>
+          )
+        ) : (
+          <Alert
+            color={successColor}
+            bgcolor={successColorBG}
+            message={message}
+          />
+        )}
+      </StyledAlerts>
+    )
   );
 };
 

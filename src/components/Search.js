@@ -5,6 +5,7 @@ import { colorWhite, grey, shortShadow, shortShadowLight } from "../Variables";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchWeather, fetchForecast } from "../Api";
+import { motion } from "framer-motion";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,11 @@ const Search = () => {
   };
 
   return (
-    <StyledSearch>
+    <StyledSearch
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <StyledForm className={theme ? "dark-theme" : null} onSubmit={submitForm}>
         <input
           type="text"
@@ -36,7 +41,7 @@ const Search = () => {
   );
 };
 
-const StyledSearch = styled.div`
+const StyledSearch = styled(motion.div)`
   width: 100%;
   display: flex;
   align-items: center;

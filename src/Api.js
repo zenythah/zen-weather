@@ -12,6 +12,8 @@ import {
   fetchFavforecastSuccess,
   addFavorite,
   remFavorite,
+  setAlertType,
+  setVisible,
 } from "./actions/action";
 
 export const fetchWeather = (location) => {
@@ -48,7 +50,15 @@ export const fetchForecast = (location) => {
         dispatch(fetchForecastSuccess(data.data));
       })
       //calling the action that is responsible for the error handling
-      .catch((err) => dispatch(fetchForecastError(err)));
+      .catch((err) => {
+        dispatch(fetchForecastError(err));
+        dispatch(setAlertType("error"));
+        dispatch(setVisible()); // sets it to true
+
+        setTimeout(() => {
+          dispatch(setVisible()); //after 3second sets it to false
+        }, 3000);
+      });
   };
 };
 

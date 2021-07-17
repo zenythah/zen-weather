@@ -11,6 +11,8 @@ const FETCH_FAVFORECAST_ERROR = "FETCH_FAVFORECAST_ERROR";
 const ADD_FAVORITE = "ADD_FAVORITE";
 const REM_FAVORITE = "REM_FAVORITE";
 const SET_TOGGLE = "SET_TOGGLE";
+const SET_VISIBLE = "SET_VISIBLE";
+const SET_ALERT_TYPE = "SET_ALERT_TYPE";
 
 export const setTheme = () => {
   return {
@@ -95,5 +97,16 @@ export const fetchFavforecastError = (err) => {
 export const toggleAside = () => {
   return {
     type: SET_TOGGLE,
+  };
+};
+
+export const setVisible = () => {
+  return { type: SET_VISIBLE };
+};
+
+export const setAlertType = (alert) => {
+  return {
+    type: SET_ALERT_TYPE,
+    payload: alert,
   };
 };

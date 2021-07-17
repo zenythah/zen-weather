@@ -16,6 +16,7 @@ import {
 } from "../Variables";
 import Forecast from "./Forecast";
 import { addfavorite, remfavorite, fetchFavforecast } from "../Api";
+import { setAlertType, setVisible } from "../actions/action";
 
 const Weather = () => {
   const location = useSelector((state) => state.weather.location);
@@ -38,27 +39,41 @@ const Weather = () => {
     return [time, newDate];
   };
 
+  const runVisibleAlert = () => {
+    dispatch(setVisible()); // sets it to true
+
+    setTimeout(() => {
+      dispatch(setVisible()); //after 3second sets it to false
+    }, 3000);
+  };
+
   const checkFav = (location) => {
     // checking if there are favs and if the location exists in the favs
     if (favorites.favs.length >= 0 && favorites.favs.includes(location)) {
       dispatch(remfavorite(location));
+      dispatch(setAlertType("rem"));
 
       favorites.favs.forEach((loc) => {
         dispatch(fetchFavforecast(loc));
       });
+      runVisibleAlert();
     } else if (favorites.favs.length <= 0) {
       // checking if favs is empty
       dispatch(addfavorite(location));
+      dispatch(setAlertType("add"));
 
       favorites.favs.forEach((loc) => {
         dispatch(fetchFavforecast(loc));
       });
+      runVisibleAlert();
     } else if (favorites.favs.filter((fav) => fav !== location).length >= 0) {
       dispatch(addfavorite(location));
+      dispatch(setAlertType("add"));
 
       favorites.favs.forEach((loc) => {
         dispatch(fetchFavforecast(loc));
       });
+      runVisibleAlert();
     }
   };
 
